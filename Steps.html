@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step-by-Step Guide to Create API in DRF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #2d87f0;
+        }
+        ol {
+            padding-left: 20px;
+        }
+        code {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .step {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>How to Create an API in Django Rest Framework (DRF)</h1>
+
+<div class="step">
+    <h2>Step 1: Install Python and Django</h2>
+    <p>Make sure you have Python installed on your system. You can download it from <a href="https://www.python.org/downloads/">here</a>.</p>
+    <p>To install Django, open your terminal and run:</p>
+    <pre><code>pip install django</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 2: Install Django Rest Framework (DRF)</h2>
+    <p>To install DRF, run the following command:</p>
+    <pre><code>pip install djangorestframework</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 3: Create a Django Project</h2>
+    <p>Once Django and DRF are installed, create a new Django project by running:</p>
+    <pre><code>django-admin startproject myproject</code></pre>
+    <p>Navigate into your project directory:</p>
+    <pre><code>cd myproject</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 4: Create a Django App</h2>
+    <p>Inside your project directory, create an app where the API will be defined:</p>
+    <pre><code>python manage.py startapp api</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 5: Add DRF to Installed Apps</h2>
+    <p>Open your <code>settings.py</code> file in your project directory, and add <code>'rest_framework'</code> and your app (e.g., <code>'api'</code>) to the <code>INSTALLED_APPS</code> list:</p>
+    <pre><code>INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',  <!-- Add this line -->
+    'api',             <!-- Add your app here -->
+]</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 6: Create a Model</h2>
+    <p>Define a model for the API. In your <code>api/models.py</code> file, create a simple model:</p>
+    <pre><code>from django.db import models
+
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 7: Create a Serializer</h2>
+    <p>Create a serializer for the model. In your <code>api/serializers.py</code> file, add the following:</p>
+    <pre><code>from rest_framework import serializers
+from .models import Company
+
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ['id', 'name', 'location']</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 8: Create a ViewSet</h2>
+    <p>In your <code>api/views.py</code> file, create a viewset for the Company model:</p>
+    <pre><code>from rest_framework import viewsets
+from .models import Company
+from .serializers import CompanySerializer
+
+class CompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 9: Register the ViewSet with a Router</h2>
+    <p>In your <code>api/urls.py</code> file, set up a router to map URLs to the viewset:</p>
+    <pre><code>from django.urls import path, include
+from rest_framework import routers
+from .views import CompanyViewSet
+
+router = routers.DefaultRouter()
+router.register(r'companies', CompanyViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]</code></pre>
+</div>
+<div class="step">
+    <h2>Step 10: Register the api/urls.py with a Company/urls.py </h2>
+    <p>do in main urls.py file </p>
+    <pre><code>
+        from django.contrib import admin
+        from django.urls import path, include
+        from .views import *
+        
+        urlpatterns = [
+            path('admin/', admin.site.urls),
+            path('home/', home_page),
+            path('api/v1/', include('api.urls')),  # include this line to acces api urls then go api views
+        ]</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 11: Migrate the Database</h2>
+    <p>Run the migrations to create the necessary database tables:</p>
+    <pre><code>python manage.py makemigrations
+python manage.py migrate</code></pre>
+</div>
+
+<div class="step">
+    <h2>Step 12: Create Superuser</h2>
+    <p>Create a superuser to access the Django admin:</p>
+    <pre><code>python manage.py createsuperuser</code></pre>
+    <p>Follow the instructions to create a superuser account.</p>
+</div>
+
+<div class="step">
+    <h2>Step 13: Run the Server</h2>
+    <p>Start the Django development server:</p>
+    <pre><code>python manage.py runserver</code></pre>
+    <p>Your API will be available at <code>http://127.0.0.1:8000/api/v1/companies/</code></p>
+</div>
+
+<div class="step">
+    <h2>Step 14: Test the API</h2>
+    <p>You can now access your API through the browser or tools like <a href="https://www.postman.com/" target="_blank">Postman</a> to test the endpoints.</p>
+</div>
+
+</body>
+</html>
