@@ -19,6 +19,8 @@ class Company(models.Model):
         ), default='IT'
     )
     added_date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.company_name + '  '+self.company_address 
 
 # Employee Model
 class Employee(models.Model):
