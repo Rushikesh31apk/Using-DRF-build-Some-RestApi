@@ -65,4 +65,7 @@ class Employee(models.Model):
     employee_status = models.BooleanField(default=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.employee_name + '  '+self.employee_email
+
     
