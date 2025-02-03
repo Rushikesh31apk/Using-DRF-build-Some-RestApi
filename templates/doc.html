@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .endpoint {
+            color: #2980b9;
+        }
+        .method {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Company API Documentation</h1>
+    <p>Welcome to the API documentation for the Company API. Below you will find all the available endpoints and their details.</p>
+
+    <h2>API Endpoints</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Endpoint</th>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="endpoint">/api/v1/companies/</td>
+                <td class="method">GET</td>
+                <td>Get a list of all companies.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/companies/{id}/</td>
+                <td class="method">GET</td>
+                <td>Get detailed information about a specific company.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/companies/{id}/employees/</td>
+                <td class="method">GET</td>
+                <td>Get a list of employees for a specific company.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/employees/</td>
+                <td class="method">GET</td>
+                <td>Get a list of all employees.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/employees/{id}/</td>
+                <td class="method">GET</td>
+                <td>Get detailed information about a specific employee.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/companies/</td>
+                <td class="method">POST</td>
+                <td>Create a new company.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/companies/{id}/</td>
+                <td class="method">PUT</td>
+                <td>Update details of a specific company.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/companies/{id}/</td>
+                <td class="method">DELETE</td>
+                <td>Delete a specific company.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/employees/</td>
+                <td class="method">POST</td>
+                <td>Create a new employee.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/employees/{id}/</td>
+                <td class="method">PUT</td>
+                <td>Update details of a specific employee.</td>
+            </tr>
+            <tr>
+                <td class="endpoint">/api/v1/employees/{id}/</td>
+                <td class="method">DELETE</td>
+                <td>Delete a specific employee.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Response Formats</h2>
+    <p>All responses are returned in JSON format. For example, when retrieving details of a company or employee, the response will look like this:</p>
+    <pre>
+{
+    "id": 1,
+    "name": "Company Name",
+    "address": "123 Company St",
+    "employees": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "position": "Manager"
+        }
+    ]
+}
+    </pre>
+
+    <h2>Notes</h2>
+    <ul>
+        <li>Replace <strong>{id}</strong> with the specific company or employee ID when accessing detailed information or making updates.</li>
+        <li>All endpoints require proper authentication, typically via an API key or token (ensure you include this in the headers).</li>
+    </ul>
+
+</body>
+</html>

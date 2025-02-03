@@ -20,7 +20,7 @@ from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home_page),
+    path('', home_page),
     path('api/v1/', include('api.urls')),  # Fixed: Added trailing slash
 ]
 
